@@ -158,8 +158,4 @@ We welcome contributions to the Ticketing System project. Please follow these st
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-### Contact
-
-For any questions or support, please contact the project maintainers at support@example.com.
-
 Thank you for using the Ticketing System for SDLC and Bug Reporting! We hope this system enhances your development workflow and improves collaboration within your team.
