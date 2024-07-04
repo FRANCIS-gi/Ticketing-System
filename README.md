@@ -1,6 +1,8 @@
+## README
+
 ### Project Overview
 
-Welcome to the Ticketing System for SDLC and Bug Reporting! This project is designed to streamline the software development lifecycle (SDLC) and bug reporting processes. It provides a comprehensive platform for managing projects, tracking tasks, reporting bugs, and ensuring effective communication among team members. Built using Yii Framework, with MSSQL as the database and hosted on IIS, this system aims to improve productivity and collaboration within development teams.
+Welcome to the Ticketing System for SDLC and Bug Reporting! This project is designed to streamline the software development lifecycle (SDLC) and bug reporting processes. It provides a comprehensive platform for managing projects, tracking tasks, reporting bugs, and ensuring effective communication among team members. Built using the Yii Framework, with MSSQL as the database and hosted on IIS, this system aims to improve productivity and collaboration within development teams.
 
 ### Key Features
 
@@ -144,18 +146,47 @@ Follow these steps to set up the Ticketing System using Yii Basic:
 8. **Deploy the Application**:
    - Once configured and tested locally, deploy the application to your production environment following best practices for Yii applications.
 
-### Contributing
+### Development Guidelines
 
-We welcome contributions to the Ticketing System project. Please follow these steps to contribute:
+To ensure the stability and integrity of the main repository, please follow these guidelines when contributing to the project:
 
-1. Fork the repository on GitHub.
-2. Create a new branch for your feature or bugfix.
-3. Make your changes and commit them with descriptive commit messages.
-4. Push your changes to your forked repository.
-5. Open a pull request to the main repository.
+1. **Fork the Repository**:
+   - Navigate to the project's GitHub page.
+   - Click the "Fork" button to create your own copy of the repository.
+
+2. **Create a Branch for Your Work**:
+   - Clone your forked repository to your local machine.
+   - Navigate to the project directory in your terminal.
+   - Create a new branch for your feature or bugfix:
+     ```bash
+     git checkout -b your-feature-branch
+     ```
+
+3. **Make Your Changes**:
+   - Implement your changes or additions.
+   - Commit your changes with descriptive commit messages:
+     ```bash
+     git add .
+     git commit -m "Description of the changes"
+     ```
+
+4. **Push Your Changes**:
+   - Push your branch to your forked repository:
+     ```bash
+     git push origin your-feature-branch
+     ```
+
+5. **Create a Pull Request**:
+   - Navigate to the original repository on GitHub.
+   - Click "Compare & pull request".
+   - Describe your changes and submit the pull request for review.
 
 ### License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
+
+### Contact
+
+For any questions or support, please contact the project maintainers at fgkiron@gmail.com.
 
 Thank you for using the Ticketing System for SDLC and Bug Reporting! We hope this system enhances your development workflow and improves collaboration within your team.
