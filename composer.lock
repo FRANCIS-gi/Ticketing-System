@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72ac0b8252822528c034bbf39a2eb746",
+    "content-hash": "68b8c6ff6df35ef960f44169c03e9ef0",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -567,6 +567,57 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
             "time": "2021-07-14T16:46:02+00:00"
+        },
+        {
+            "name": "psr/simple-cache",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/764e0b3939f5ca87cb904f570ef9be2d78a07865",
+                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/simple-cache/tree/3.0.0"
+            },
+            "time": "2021-10-29T13:26:27+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1358,6 +1409,276 @@
             "time": "2024-04-18T09:32:20+00:00"
         },
         {
+            "name": "wdmg/yii2-helpers",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wdmg/yii2-helpers.git",
+                "reference": "36d15cd9aa019d1bdba28ec3a4bfbc70050defcd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wdmg/yii2-helpers/zipball/36d15cd9aa019d1bdba28ec3a4bfbc70050defcd",
+                "reference": "36d15cd9aa019d1bdba28ec3a4bfbc70050defcd",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "^2.0.40",
+                "yiisoft/yii2-httpclient": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "wdmg\\helpers\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexsander Vyshnyvetskyy",
+                    "email": "alex.vyshnyvetskyy@gmail.com"
+                },
+                {
+                    "name": "W.D.M.Group, Ukraine",
+                    "email": "wdmg.com.ua@gmail.com"
+                }
+            ],
+            "description": "Custom helper functions for Yii 2.0",
+            "homepage": "https://github.com/wdmg/yii2-helpers",
+            "keywords": [
+                "array-helper",
+                "daterime-helper",
+                "extension",
+                "helper",
+                "ip-helper",
+                "string-helper",
+                "text-analyzer",
+                "utilities",
+                "wdmg",
+                "yii",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/wdmg/yii2-helpers/issues",
+                "source": "https://github.com/wdmg/yii2-helpers"
+            },
+            "time": "2023-07-07T09:17:25+00:00"
+        },
+        {
+            "name": "wdmg/yii2-tickets",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wdmg/yii2-tickets.git",
+                "reference": "d9ab4465f3bf0099c98ffcd5cefd291c8c964c75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wdmg/yii2-tickets/zipball/d9ab4465f3bf0099c98ffcd5cefd291c8c964c75",
+                "reference": "d9ab4465f3bf0099c98ffcd5cefd291c8c964c75",
+                "shasum": ""
+            },
+            "require": {
+                "wdmg/yii2-helpers": "^1.0.1",
+                "yiisoft/yii2": "^2.0.13"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "wdmg\\tickets\\Bootstrap"
+            },
+            "autoload": {
+                "psr-4": {
+                    "wdmg\\tickets\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexsander Vyshnyvetskyy",
+                    "email": "alex.vyshnyvetskyy@gmail.com"
+                },
+                {
+                    "name": "W.D.M.Group, Ukraine",
+                    "email": "wdmg.com.ua@gmail.com"
+                }
+            ],
+            "description": "Ticket system for Yii2",
+            "homepage": "https://github.com/wdmg/yii2-tickets",
+            "keywords": [
+                "Ticket System",
+                "wdmg",
+                "yii2",
+                "yii2-tickets"
+            ],
+            "support": {
+                "issues": "https://github.com/wdmg/yii2-tickets/issues",
+                "source": "https://github.com/wdmg/yii2-tickets"
+            },
+            "time": "2019-03-16T16:33:20+00:00"
+        },
+        {
+            "name": "yiisoft/db",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/db.git",
+                "reference": "71c9f37596da41a910dee440d38f5d1bb303a39b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/db/zipball/71c9f37596da41a910dee440d38f5d1bb303a39b",
+                "reference": "71c9f37596da41a910dee440d38f5d1bb303a39b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-pdo": "*",
+                "php": "^8.0",
+                "psr/log": "^2.0|^3.0",
+                "psr/simple-cache": "^2.0|^3.0"
+            },
+            "require-dev": {
+                "maglnet/composer-require-checker": "^4.2",
+                "phpunit/phpunit": "^9.6|^10.0",
+                "rector/rector": "^1.0",
+                "roave/infection-static-analysis-plugin": "^1.16",
+                "spatie/phpunit-watcher": "^1.23",
+                "vimeo/psalm": "^4.30|^5.20",
+                "yiisoft/aliases": "^3.0",
+                "yiisoft/cache-file": "^3.1",
+                "yiisoft/di": "^1.0",
+                "yiisoft/event-dispatcher": "^1.0",
+                "yiisoft/json": "^1.0",
+                "yiisoft/log": "^2.0",
+                "yiisoft/var-dumper": "^1.5",
+                "yiisoft/yii-debug": "dev-master|dev-php80"
+            },
+            "type": "library",
+            "extra": {
+                "config-plugin-options": {
+                    "source-directory": "config"
+                },
+                "config-plugin": {
+                    "params": "params.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yiisoft\\Db\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Yii Database",
+            "homepage": "https://www.yiiframework.com/",
+            "keywords": [
+                "database",
+                "dbal",
+                "query-builder",
+                "sql",
+                "yii"
+            ],
+            "support": {
+                "chat": "https://t.me/yii3en",
+                "forum": "https://www.yiiframework.com/forum/",
+                "irc": "ircs://irc.libera.chat:6697/yii",
+                "issues": "https://github.com/yiisoft/db/issues/issues?state=open",
+                "source": "https://github.com/yiisoft/db",
+                "wiki": "https://www.yiiframework.com/wiki/"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2024-03-21T07:18:22+00:00"
+        },
+        {
+            "name": "yiisoft/db-mssql",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/db-mssql.git",
+                "reference": "fb77c8369ee22799d88a8fa147f2e4ee068e5057"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/db-mssql/zipball/fb77c8369ee22799d88a8fa147f2e4ee068e5057",
+                "reference": "fb77c8369ee22799d88a8fa147f2e4ee068e5057",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "php": "^8.0",
+                "yiisoft/db": "^1.2"
+            },
+            "require-dev": {
+                "maglnet/composer-require-checker": "^4.2",
+                "phpunit/phpunit": "^9.6|^10.0",
+                "rector/rector": "^1.0",
+                "roave/infection-static-analysis-plugin": "^1.16",
+                "spatie/phpunit-watcher": "^1.23",
+                "vimeo/psalm": "^4.30|^5.20",
+                "yiisoft/aliases": "^2.0",
+                "yiisoft/cache-file": "^3.1",
+                "yiisoft/var-dumper": "^1.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Yiisoft\\Db\\Mssql\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "MSSQL Server driver for Yii Database",
+            "keywords": [
+                "database",
+                "dbal",
+                "mssql",
+                "query-builder",
+                "sql",
+                "sql server",
+                "yii"
+            ],
+            "support": {
+                "chat": "https://t.me/yii3en",
+                "forum": "https://www.yiiframework.com/forum/",
+                "irc": "irc://irc.freenode.net/yii",
+                "issues": "https://github.com/yiisoft/db-mssql/issues",
+                "source": "https://github.com/yiisoft/db-mssql",
+                "wiki": "https://www.yiiframework.com/wiki/"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2024-03-21T07:21:06+00:00"
+        },
+        {
             "name": "yiisoft/yii2",
             "version": "2.0.50",
             "source": {
@@ -1635,6 +1956,89 @@
                 }
             ],
             "time": "2020-06-24T00:04:01+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-httpclient",
+            "version": "2.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-httpclient.git",
+                "reference": "5a8350e15f2db3555ba52830c9c701587c136e87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/5a8350e15f2db3555ba52830c9c701587c136e87",
+                "reference": "5a8350e15f2db3555ba52830c9c701587c136e87",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/random_compat": ">=1",
+                "yiisoft/yii2": "~2.0.13"
+            },
+            "require-dev": {
+                "cweagans/composer-patches": "^1.7",
+                "phpunit/phpunit": "4.8.34"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                },
+                "composer-exit-on-patch-failure": true,
+                "patches": {
+                    "phpunit/phpunit-mock-objects": {
+                        "Fix PHP 7 and 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_mock_objects.patch"
+                    },
+                    "phpunit/phpunit": {
+                        "Fix PHP 7 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php7.patch",
+                        "Fix PHP 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php8.patch"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\httpclient\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "HTTP client extension for the Yii framework",
+            "keywords": [
+                "curl",
+                "http",
+                "httpclient",
+                "yii2"
+            ],
+            "support": {
+                "forum": "http://www.yiiframework.com/forum/",
+                "irc": "irc://irc.freenode.net/yii",
+                "issues": "https://github.com/yiisoft/yii2-httpclient/issues",
+                "source": "https://github.com/yiisoft/yii2-httpclient",
+                "wiki": "http://www.yiiframework.com/wiki/"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2-httpclient",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-05-22T18:32:24+00:00"
         },
         {
             "name": "yiisoft/yii2-symfonymailer",

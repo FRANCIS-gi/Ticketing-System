@@ -15,7 +15,16 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    
+     public function actionCheckDbConnection()
+     {
+         if (Yii::$app->db->isActive) {
+             echo "Database connection is active.";
+         } else {
+             echo "Database connection is not active.";
+         }
+     }
+     public function behaviors()
     {
         return [
             'access' => [
@@ -124,5 +133,9 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actiontest_connection (){
+        return $this->render('test');
     }
 }
