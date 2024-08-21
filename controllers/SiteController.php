@@ -138,4 +138,14 @@ class SiteController extends Controller
     public function actiontest_connection (){
         return $this->render('test');
     }
+
+    public function actionTest(){
+    try {
+        Yii::$app->db->open();
+        echo "Database connection is successful!";
+    } catch (\Exception $e) {
+        echo "Database connection failed: " . $e->getMessage();
+    }
+    }
+
 }
