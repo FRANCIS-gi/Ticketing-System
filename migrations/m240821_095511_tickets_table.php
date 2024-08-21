@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m240813_115717_ticketing
+ * Class m240821_095511_tickets_table
  */
-class m240813_115717_ticketing extends Migration
+class m240821_095511_tickets_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -20,7 +20,7 @@ class m240813_115717_ticketing extends Migration
      */
     public function safeDown()
     {
-        echo "m240813_115717_ticketing cannot be reverted.\n";
+        echo "m240821_095511_tickets_table cannot be reverted.\n";
 
         return false;
     }
@@ -34,7 +34,7 @@ class m240813_115717_ticketing extends Migration
 
     public function down()
     {
-        echo "m240813_115717_ticketing cannot be reverted.\n";
+        echo "m240821_095511_tickets_table cannot be reverted.\n";
 
         return false;
     }
