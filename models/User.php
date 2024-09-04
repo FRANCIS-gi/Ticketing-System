@@ -1,8 +1,10 @@
 <?php
 
 namespace app\models;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
     public $id;
     public $username;
@@ -100,5 +102,18 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+    /**
+     * Summary of getDisplayName
+     * @return mixed
+     */
+   
+    // ... other User model code ...
+
+    public function getDisplayName()
+    {
+        return $this->username;
+        
     }
 }

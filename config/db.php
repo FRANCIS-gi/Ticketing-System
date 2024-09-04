@@ -2,14 +2,13 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'driverName' => 'sqlsrv',
-    'dsn' => 'sqlsrv:server=' . getenv('DB_SERVER') . ';database=' . getenv('DB_NAME'),
-    'username' => getenv('DB_USERNAME'),
-    'password' => getenv('DB_PASSWORD'),
+    'dsn' => 'mysql:host=localhost;dbname=basicadminticket',
+    'username' => 'basicadmin',
+    'password' => '1234',
     'charset' => 'utf8',
-    // Schema cache options (for production getenvironment)
+
+    // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
     //'schemaCacheDuration' => 60,
     //'schemaCache' => 'cache',
 ];
-
