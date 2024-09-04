@@ -15,16 +15,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    
-     public function actionCheckDbConnection()
-     {
-         if (Yii::$app->db->isActive) {
-             echo "Database connection is active.";
-         } else {
-             echo "Database connection is not active.";
-         }
-     }
-     public function behaviors()
+    public function behaviors()
     {
         return [
             'access' => [
@@ -90,6 +81,8 @@ class SiteController extends Controller
         }
 
         $model->password = '';
+
+        // Render the login view without the main layout
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -134,18 +127,4 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-
-    public function actiontest_connection (){
-        return $this->render('test');
-    }
-
-    public function actionTest(){
-    try {
-        Yii::$app->db->open();
-        echo "Database connection is successful!";
-    } catch (\Exception $e) {
-        echo "Database connection failed: " . $e->getMessage();
-    }
-    }
-
 }

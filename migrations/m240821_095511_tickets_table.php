@@ -12,6 +12,18 @@ class m240821_095511_tickets_table extends Migration
      */
     public function safeUp()
     {
+        $this->createTable('tickets', [
+            'ticket_id' => $this->primaryKey(),
+            'company_name' => $this->string(255)->notNull(),
+            'ticket_name' => $this->string(255)->notNull(),
+
+            'description' => $this->text(),
+            'priority' => $this->date()->notNull(),
+            'status' => $this->date(),
+            'due_date' => $this->string(50)->notNull(),
+            'created_by' => $this->integer()->notNull(),
+            'assigned_to' => $this->integer()->notNull(),
+        ]);
 
     }
 
