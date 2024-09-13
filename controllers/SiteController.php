@@ -1,42 +1,48 @@
 <?php
 
 namespace app\controllers;
+use app\models\User;
+ 
+
 
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\SignupForm;
+use app\models\Ticket;
 
 class SiteController extends Controller
 {
     /**
      * {@inheritdoc}
      */
-    
-     public function actionCheckDbConnection()
-     {
-         if (Yii::$app->db->isActive) {
-             echo "Database connection is active.";
-         } else {
-             echo "Database connection is not active.";
-         }
-     }
-     public function behaviors()
+    public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout'],
+                'only' => ['logout', 'about', 'contact', 'ticket', 'admin', 'create'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'about', 'contact', 'ticket', 'create'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'actions' => ['admin'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
                 ],
+                'denyCallback' => function ($rule, $action) {
+                    Yii::$app->session->setFlash('error', 'Please login or create an account to access this page.');
+                    return $this->redirect(['site/login']);
+                },
             ],
             'verbs' => [
                 'class' => VerbFilter::class,
@@ -61,40 +67,42 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }  
+      public function actionIndex()
+    {
+        return $this->render('index');
     }
 
     /**
      * Displays homepage.
      *
      * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+    
 
-    /**
+
+    
      * Login action.
      *
      * @return Response|string
      */
+
+  
     public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+{
+    if (!Yii::$app->user->isGuest) {
+        return $this->goHome();
     }
 
+    $model = new LoginForm();
+    if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        return $this->goBack();
+    }
+
+    $model->password = '';
+    return $this->render('login', [
+        'model' => $model,
+    ]);
+}
     /**
      * Logout action.
      *
@@ -130,22 +138,139 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
+
+     public function actionAbout()
+     {
+         $dataProvider = new ActiveDataProvider([
+             'query' => Ticket::find(),
+             'pagination' => [
+                 'pageSize' => 20,
+             ],
+         ]);
+ 
+         return $this->render('about', [
+             'dataProvider' => $dataProvider,
+         ]);
+     
+
+
+    // controllers/TicketController.php
+
+     
+    //  public function actionCancel($id)
+    //  {
+    //      $model = $this->findModel($id);
+    //      $model->status = 'cancelled';
+    //      if ($model->save()) {
+    //          return json_encode(['success' => true]);
+    //      }
+    //      return json_encode(['success' => false]);
+    //  }
+     
+    //  protected function findTicketModel($id)
+    //  {
+    //      if (($model = Ticket::findOne($id)) !== null) {
+    //          return $model;
+    //      }
+    //      throw new NotFoundHttpException('The requested ticket does not exist.');
+    //  }
+ 
+    //  public function actionUpdateStatus()
+    // {
+    //     Yii::$app->response->format = Response::FORMAT_JSON; // Set response format to JSON
+
+    //     $id = Yii::$app->request->post('id');
+    //     $status = Yii::$app->request->post('status');
+
+    //     $ticket = $this->findModel($id);
+    //     $ticket->status = $status;
+
+    //     if ($ticket->save()) {
+    //         return ['success' => true];
+    //     } else {
+    //         return ['success' => false, 'message' => 'Unable to update ticket status.'];
+    //     }
+    
+
+
+    /**
+     * Displays admin page with all tickets.
+     *
+     * @return string
+     */
+    // public function actionAdmin()
+    // {
+    //     $dataProvider = new ActiveDataProvider([
+    //         'query' => Ticket::find(),
+    //         'pagination' => [
+    //             'pageSize' => 20,
+    //         ],
+    //         'sort' => [
+    //             'defaultOrder' => [
+    //                 'created_at' => SORT_DESC,
+    //             ]
+    //         ],
+    //     ]);
+
+        return $this->render('admin', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+
+    
+
+    /**
+     * Signup action.
+     *
+     * @return Response|string
+     */
+    public function actionSignup()
     {
-        return $this->render('about');
+        $model = new SignupForm();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            // Redirect to login page after successful signup
+            Yii::$app->session->setFlash('success', 'Please login to proceed.');
+            return $this->redirect(['site/login']);
+        }
+    
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
     }
-
-    public function actiontest_connection (){
-        return $this->render('test');
-    }
-
-    public function actionTest(){
-    try {
-        Yii::$app->db->open();
-        echo "Database connection is successful!";
-    } catch (\Exception $e) {
-        echo "Database connection failed: " . $e->getMessage();
-    }
-    }
-
 }
+
+    /**
+ 
+     */
+//     public function actionTicket()
+//     {
+//         $model = new Ticket();
+
+//         if ($model->load(Yii::$app->request->post())) {
+//             $model->user_id = Yii::$app->user->id;
+//             if ($model->save()) {
+//                 Yii::$app->session->setFlash('success', 'Ticket created successfully.');
+//                 return $this->redirect(['ticket']);
+//             } else {
+//                 Yii::$app->session->setFlash('error', 'Failed to create ticket. Please try again.');
+//             }
+//         }
+
+//         $dataProvider = new ActiveDataProvider([
+//             'query' => Ticket::find()->where(['user_id' => Yii::$app->user->id]),
+//             'sort' => [
+//                 'defaultOrder' => [
+//                     'created_at' => SORT_DESC,
+//                 ]
+//             ],
+//         ]);
+
+//         return $this->render('ticket', [
+//             'model' => $model,
+//             'dataProvider' => $dataProvider,
+//         ]);
+//     }
+// }

@@ -2,103 +2,128 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+use Yii;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
+use yii\behaviors\TimestampBehavior;
+
+class User extends ActiveRecord implements IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
+    public $is_admin;
+    public $userType; // Virtual attribute
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+    const ROLE_USER = 10;
+    const ROLE_ADMIN = 20;
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
 
+    public static function tableName()
+    {
+        return 'user';
+    }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['admin-page'], // The actions that require role-based access
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'], // Only logged-in users
+                        'matchCallback' => function ($rule, $action) {
+                            return in_array(Yii::$app->user->identity->role, ['project_manager', 'ceo']);
+                        },
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            [['name', 'company_name', 'company_email', 'password_hash'], 'required'],
+            ['company_email', 'email'],
+            ['company_email', 'unique'],
+            ['role', 'in', 'range' => ['user', 'project_manager', 'ceo']], // Define allowed roles
+            ['password_hash', 'string', 'min' => 6],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE]],
+            [['auth_key', 'access_token'], 'string'],
+        ];
+    }
+
+    public static function findByCompanyEmail($email)
+    {
+        return static::findOne(['company_email' => $email, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public static function isUserAdmin($email)
+    {
+        return static::findOne(['email' => $email, 'role' => self::ROLE_ADMIN]) !== null;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = Yii::$app->security->generateRandomString();
+                $this->access_token = Yii::$app->security->generateRandomString(40);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function getIsAdmin()
+    {
+        return $this->is_admin == 1; // Returns true if the user is an admin
+    }
+
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return static::findOne(['access_token' => $token, 'status' => self::STATUS_ACTIVE]);
     }
 
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
-        return $this->id;
+        return $this->getPrimaryKey();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->getAuthKey() === $authKey;
     }
 
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
+
+    public function setPassword($password)
+    {
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    public function getCompanyEmail()
+    {
+        return $this->company_email; // Ensure 'company_email' exists in the database
     }
 }
