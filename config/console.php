@@ -4,7 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic-ess-console',
+    'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
@@ -14,6 +14,14 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['admin'],
+            'itemChildren' => [
+                'accessAdminPage' => [],
+                'admin' => ['accessAdminPage'],
+            ],
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
