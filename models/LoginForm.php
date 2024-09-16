@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use Yii;
@@ -10,38 +11,14 @@ class LoginForm extends Model
     public $password;
     public $rememberMe = true;
 
-    private $_user = false;
-
-    public $userType;  // Add this line if the property is missing
-
-
     public function rules()
     {
         return [
             [['company_email', 'password'], 'required'],
-            ['company_email', 'email'],
+            ['company_email', 'email', 'message' => 'Email is not a valid email address.'],
+            ['rememberMe', 'boolean'],
             ['password', 'validatePassword'],
         ];
-    }
-
-    public function validatePassword($attribute, $params)
-    {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect email or password.');
-            }
-        }
-    }
-
-    public function getUser()
-    {
-        if ($this->_user === false) {
-            $this->_user = User::findByCompanyEmail($this->company_email);
-        }
-
-        return $this->_user;
     }
 
     public function login()
@@ -52,9 +29,16 @@ class LoginForm extends Model
         return false;
     }
 
-    
-    public static function findByCompanyEmail($email)
+    public function validatePassword($attribute, $params)
     {
-        return static::findOne(['company_email' => $email]);
+        $user = $this->getUser();
+        if (!$user || !$user->validatePassword($this->password)) {
+            $this->addError($attribute, 'Incorrect email or password.');
+        }
+    }
+
+    protected function getUser()
+    {
+        return User::findOne(['company_email' => $this->company_email]);
     }
 }
